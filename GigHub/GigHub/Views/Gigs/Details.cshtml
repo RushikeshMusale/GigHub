@@ -1,0 +1,58 @@
+﻿@model GigHub.Core.ViewModels.GigDetailViewModel
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<h2>
+    @Model.Gig.Artist.Name
+    @if (User.Identity.IsAuthenticated)
+    {
+        if (!Model.IsFollowing)
+        {
+            <button type="button" data-following=@Model.Gig.Artist.Id
+                    class="btn btn-default js-toggle-following">Follow</button><br />
+        }
+        else
+        {
+            <button type="button" data-following=@Model.Gig.Artist.Id
+                    class="btn btn-info js-toggle-following">
+                Following
+            </button><br />
+        }
+    }    
+
+</h2>
+
+<p>Performing at @Model.Gig.Venue on @Model.Gig.Datetime.ToString("d MMM") at @Model.Gig.Datetime.ToString("HH:mm")</p>
+
+<p>@Model.AttendingMessage</p>
+
+
+@section Scripts{
+
+    <script>
+               $(document).ready(function () {
+            
+                   GigDetailsController.init();
+            //Move this into razor code to look clean
+            //var isFollowing = $(".js-toggle-following").attr("data-is-following");
+            //debugger;
+            //if (isFollowing == "True") {
+            //    button.removeClass("btn-default")
+            //            .addClass("btn-info")
+            //            .text("Following");
+            //}
+            //else {
+            //    button.removeClass("btn-info")
+            //           .addClass("btn-default")
+            //           .text("Follow")
+            //}
+        })
+
+        
+
+        
+    </script>
+
+}
